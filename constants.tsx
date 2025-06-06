@@ -2,16 +2,16 @@
 import React from 'react';
 import { Section, QuizQuestionType, CatalogItemType, PlanStepType, FillInTheBlankAnswersType } from './types';
 
-// Section Components (forward declaration, will be imported in App.tsx)
-// These are placeholders for type checking, actual components are in their files.
-const SectionWelcome: React.FC = () => null;
-const SectionQuiz: React.FC = () => null;
-const SectionFoundations: React.FC = () => null;
-const SectionMinister: React.FC = () => null;
-const SectionDiscoveryPath: React.FC = () => null;
-const SectionGiftCatalog: React.FC = () => null;
-const SectionPersonalPlan: React.FC = () => null;
-const SectionFinal: React.FC = () => null;
+
+// Importaciones de los componentes reales:
+import SectionWelcome from './components/SectionWelcome';
+import SectionQuiz from './components/SectionQuiz';
+import SectionFoundations from './components/SectionFoundations';
+import SectionMinister from './components/SectionMinister';
+import SectionDiscoveryPath from './components/SectionDiscoveryPath';
+import SectionGiftCatalog from './components/SectionGiftCatalog';
+import SectionPersonalPlan from './components/SectionPersonalPlan';
+import SectionFinal from './components/SectionFinal';
 
 // SVG Icons as React Components
 // Fill with "currentColor" to be styled by Tailwind text color classes e.g. text-sky-700

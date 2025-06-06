@@ -1,46 +1,26 @@
-
+// App.tsx
 import React, { useState, useCallback } from 'react';
-import { SECTIONS_DATA } from './constants';
-import SectionWelcome from './components/SectionWelcome';
-import SectionQuiz from './components/SectionQuiz';
-import SectionFoundations from './components/SectionFoundations';
-import SectionMinister from './components/SectionMinister';
-import SectionDiscoveryPath from './components/SectionDiscoveryPath';
-import SectionGiftCatalog from './components/SectionGiftCatalog';
-import SectionPersonalPlan from './components/SectionPersonalPlan';
-import SectionFinal from './components/SectionFinal';
-import Navigation from './components/Navigation';
+import { SECTIONS_DATA } from './constants'; // Ahora SECTIONS_DATA contiene los componentes reales
+// Ya no necesitas importar los componentes aquí individualmente si solo se usan en componentMap,
+// Y ya no necesitas el componentMap ni sectionsWithResolvedComponents
 
-// Map string component names from constants to actual component imports
-const componentMap: { [key: string]: React.FC } = {
-  SectionWelcome,
-  SectionQuiz,
-  SectionFoundations,
-  SectionMinister,
-  SectionDiscoveryPath,
-  SectionGiftCatalog,
-  SectionPersonalPlan,
-  SectionFinal,
-};
+import Navigation from './components/Navigation';
 
 const App: React.FC = () => {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
 
-  const sectionsWithResolvedComponents = SECTIONS_DATA.map(section => ({
-    ...section,
-    component: componentMap[section.component.name] || (() => <div>Componente no encontrado</div>),
-  }));
-
+  // Usa SECTIONS_DATA directamente, ya contiene los componentes reales
+  const sections = SECTIONS_DATA;
 
   const handleNavigate = useCallback((direction: number) => {
     const newIndex = currentSectionIndex + direction;
-    if (newIndex >= 0 && newIndex < sectionsWithResolvedComponents.length) {
+    if (newIndex >= 0 && newIndex < sections.length) {
       setCurrentSectionIndex(newIndex);
     }
-  }, [currentSectionIndex, sectionsWithResolvedComponents.length]);
+  }, [currentSectionIndex, sections.length]);
 
-  const CurrentSectionComponent = sectionsWithResolvedComponents[currentSectionIndex]?.component;
-  const currentSectionData = sectionsWithResolvedComponents[currentSectionIndex];
+  const CurrentSectionComponent = sections[currentSectionIndex]?.component;
+  const currentSectionData = sections[currentSectionIndex];
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-slate-100 p-0 md:p-5">
@@ -63,7 +43,7 @@ const App: React.FC = () => {
 
         <Navigation
           currentSectionIndex={currentSectionIndex}
-          totalSections={sectionsWithResolvedComponents.length}
+          totalSections={sections.length}
           onNavigate={handleNavigate}
         />
       </div>
